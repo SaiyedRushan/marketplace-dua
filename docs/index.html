@@ -183,12 +183,14 @@
 
       /* ---------- Showcase ---------- */
       .showcase { padding: 84px 0; text-align: center; }
-      .shot {
-        margin: 0 auto; max-width: 920px; border-radius: 20px; overflow: hidden;
-        border: 1px solid var(--line); box-shadow: var(--shadow); line-height: 0;
-        background: #11201b;
+      .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 880px; margin: 0 auto; }
+      .shots figure { margin: 0; }
+      .shots figure img {
+        width: 100%; height: auto; display: block;
+        border-radius: 16px; border: 1px solid var(--line); box-shadow: var(--shadow);
       }
-      .shot img { width: 100%; height: auto; display: block; }
+      .shots figcaption { margin-top: 14px; font-family: var(--display); font-style: italic; font-size: 19px; color: var(--ink-soft); }
+      @media (max-width: 680px) { .shots { grid-template-columns: 1fr; } }
 
       /* ---------- Final CTA ---------- */
       .cta {
@@ -382,7 +384,10 @@
           <h2>A gentle pause, right on the page.</h2>
           <p>The reminder appears the moment you land on a shopping site, then steps aside with a tap.</p>
         </div>
-        <div class="shot reveal"><img src="assets/screenshot-dark.png" alt="The Marketplace Du'a reminder shown over Amazon" /></div>
+        <div class="shots reveal">
+          <figure><img src="assets/shot-light.png" alt="The Marketplace Du'a reminder in light theme" /><figcaption>Light</figcaption></figure>
+          <figure><img src="assets/shot-dark.png" alt="The Marketplace Du'a reminder in dark theme" /><figcaption>Dark</figcaption></figure>
+        </div>
       </div>
     </section>
 

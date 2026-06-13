@@ -12,12 +12,14 @@ It shows two things, with links to verify each hadith on [sunnah.com](https://su
    >
    > *Lā ilāha illa-llāhu waḥdahu lā sharīka lah, lahu-l-mulku wa lahu-l-ḥamd, yuḥyī wa yumīt, wa huwa ḥayyun lā yamūt, bi-yadihi-l-khayr, wa huwa ʿalā kulli shayʾin qadīr.*
 
-2. A **prompt to ask Allah for good in what you intend to buy**, with the
-   Prophetic ﷺ supplication for what one acquires — [Sunan Abī Dāwūd 2160](https://sunnah.com/abudawud:2160) (graded *ḥasan*):
+2. A **reminder to ask Allah for whatever you seek — however small**, with the
+   Prophet's ﷺ teaching — [Jāmiʿ at-Tirmidhī 3604](https://sunnah.com/tirmidhi:3604j) (graded *ḥasan*):
 
-   > اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهُ وَخَيْرَ مَا جَبَلْتَهُ عَلَيْهِ، وَأَعُوذُ بِكَ مِنْ شَرِّهِ وَشَرِّ مَا جَبَلْتَهُ عَلَيْهِ
+   > لِيَسْأَلْ أَحَدُكُمْ رَبَّهُ حَاجَتَهُ حَتَّى يَسْأَلَهُ الْمِلْحَ، وَحَتَّى يَسْأَلَهُ شِسْعَ نَعْلِهِ إِذَا انْقَطَعَ
    >
-   > *Allāhumma innī asʾaluka khayrahu wa khayra mā jabaltahu ʿalayh, wa aʿūdhu bika min sharrihi wa sharri mā jabaltahu ʿalayh.*
+   > *Li-yasʾal aḥadukum rabbahu ḥājatahu, ḥattā yasʾalahu-l-milḥa, wa ḥattā yasʾalahu shisʿa naʿlihi idhā-nqaṭaʿa.*
+   >
+   > "Let one of you ask his Lord for his every need, until he asks Him for salt, and asks Him for the strap of his sandal when it breaks."
 
 ## Features
 

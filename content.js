@@ -71,18 +71,18 @@ const DUA_MARKET = {
   source: { label: "Jāmiʿ at-Tirmidhī 3428", url: "https://sunnah.com/tirmidhi:3428" }
 };
 
-// Du'a for what you acquire — Sunan Abī Dāwūd 2160 (graded ḥasan).
+// A reminder to ask Allah for everything, however small — Jāmiʿ at-Tirmidhī 3604 (ḥasan).
 const DUA_SEEK = {
   prompt:
-    "Now pause and ask Allah for what you truly need — and for goodness and barakah in whatever you buy, and refuge from its harm.",
+    "No need is too small to ask of Allah. Before you buy, turn to Him for exactly what you seek. The Prophet ﷺ said:",
   arabic:
-    "اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهُ وَخَيْرَ مَا جَبَلْتَهُ عَلَيْهِ، وَأَعُوذُ بِكَ مِنْ شَرِّهِ وَشَرِّ مَا جَبَلْتَهُ عَلَيْهِ",
+    "لِيَسْأَلْ أَحَدُكُمْ رَبَّهُ حَاجَتَهُ حَتَّى يَسْأَلَهُ الْمِلْحَ، وَحَتَّى يَسْأَلَهُ شِسْعَ نَعْلِهِ إِذَا انْقَطَعَ",
   translit:
-    "Allāhumma innī asʾaluka khayrahu wa khayra mā jabaltahu ʿalayh, wa aʿūdhu bika min sharrihi wa sharri mā jabaltahu ʿalayh.",
+    "Li-yasʾal aḥadukum rabbahu ḥājatahu, ḥattā yasʾalahu-l-milḥa, wa ḥattā yasʾalahu shisʿa naʿlihi idhā-nqaṭaʿa.",
   translation:
-    "O Allah, I ask You for its good and the good with which You created it, and I seek refuge in You from its evil and the evil with which You created it.",
-  note: "From the Prophet's ﷺ teaching on what to say when acquiring something. Adjust the pronoun to suit what you're buying.",
-  source: { label: "Sunan Abī Dāwūd 2160", url: "https://sunnah.com/abudawud:2160" }
+    "Let one of you ask his Lord for his every need, until he asks Him for salt, and asks Him for the strap of his sandal when it breaks.",
+  note: "So ask Him — for the big things and the small.",
+  source: { label: "Jāmiʿ at-Tirmidhī 3604", url: "https://sunnah.com/tirmidhi:3604j" }
 };
 
 function renderDuaModal(siteLabel, dark) {

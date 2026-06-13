@@ -4,20 +4,33 @@ A small, minimalist Chrome extension that shows a gentle reminder to recite the
 **du'a for entering the marketplace** whenever you land on a shopping site —
 Amazon, eBay, Facebook Marketplace, and any sites you add yourself.
 
-> لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، يُحْيِي وَيُمِيتُ، وَهُوَ حَيٌّ لَا يَمُوتُ، بِيَدِهِ الْخَيْرُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ
->
-> *Lā ilāha illa-llāhu waḥdahu lā sharīka lah, lahu-l-mulku wa lahu-l-ḥamd, yuḥyī wa yumīt, wa huwa ḥayyun lā yamūt, bi-yadihi-l-khayr, wa huwa ʿalā kulli shayʾin qadīr.*
+It shows two things, with links to verify each hadith on [sunnah.com](https://sunnah.com):
+
+1. The **du'a for entering the marketplace** — [Jāmiʿ at-Tirmidhī 3428](https://sunnah.com/tirmidhi:3428):
+
+   > لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، يُحْيِي وَيُمِيتُ، وَهُوَ حَيٌّ لَا يَمُوتُ، بِيَدِهِ الْخَيْرُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ
+   >
+   > *Lā ilāha illa-llāhu waḥdahu lā sharīka lah, lahu-l-mulku wa lahu-l-ḥamd, yuḥyī wa yumīt, wa huwa ḥayyun lā yamūt, bi-yadihi-l-khayr, wa huwa ʿalā kulli shayʾin qadīr.*
+
+2. A **prompt to ask Allah for good in what you intend to buy**, with the
+   Prophetic ﷺ supplication for what one acquires — [Sunan Abī Dāwūd 2160](https://sunnah.com/abudawud:2160) (graded *ḥasan*):
+
+   > اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهُ وَخَيْرَ مَا جَبَلْتَهُ عَلَيْهِ، وَأَعُوذُ بِكَ مِنْ شَرِّهِ وَشَرِّ مَا جَبَلْتَهُ عَلَيْهِ
+   >
+   > *Allāhumma innī asʾaluka khayrahu wa khayra mā jabaltahu ʿalayh, wa aʿūdhu bika min sharrihi wa sharri mā jabaltahu ʿalayh.*
 
 ## Features
 
 - **Automatic reminder** — a clean modal appears the moment you open a shopping
-  site, with the du'a in Arabic, transliteration, translation, and its reward.
+  site, with both du'as in Arabic, transliteration, translation, and a clickable
+  reference to the hadith on sunnah.com.
 - **Built-in marketplaces** — Amazon, eBay, Facebook Marketplace, Etsy, Walmart,
   AliExpress, Alibaba, Temu, SHEIN, Target, Best Buy, Mercari, Craigslist,
   Wayfair, Wish, Noon. Turn any of them off from the popup.
 - **Custom sites** — add any other shopping website (e.g. `shop.example.com`).
 - **Frequency control** — show on every visit, once per browsing session
   (default), or once per day per site.
+- **Dark mode** — a toggleable dark theme for both the popup and the reminder.
 - **Private** — everything runs locally and is stored in your browser. No
   tracking, no network requests, no analytics.
 
@@ -35,6 +48,7 @@ Amazon, eBay, Facebook Marketplace, and any sites you add yourself.
 - Click the toolbar icon to:
   - turn reminders on/off,
   - choose how often the reminder shows,
+  - toggle dark mode,
   - enable/disable built-in marketplaces,
   - add or remove your own custom sites.
 

@@ -9,6 +9,7 @@ const el = {
   body: document.getElementById("body"),
   enabled: document.getElementById("enabled"),
   frequency: document.getElementById("frequency"),
+  darkMode: document.getElementById("dark-mode"),
   defaults: document.getElementById("defaults"),
   custom: document.getElementById("custom"),
   addForm: document.getElementById("add-form"),
@@ -43,6 +44,12 @@ function init() {
     save();
   });
 
+  el.darkMode.addEventListener("change", () => {
+    settings.darkMode = el.darkMode.checked;
+    applyTheme();
+    save();
+  });
+
   el.addForm.addEventListener("submit", (e) => {
     e.preventDefault();
     addCustom(el.addInput.value);
@@ -52,9 +59,15 @@ function init() {
 function render() {
   el.enabled.checked = settings.enabled;
   el.frequency.value = settings.frequency;
+  el.darkMode.checked = !!settings.darkMode;
   el.body.classList.toggle("disabled", !settings.enabled);
+  applyTheme();
   renderDefaults();
   renderCustom();
+}
+
+function applyTheme() {
+  document.body.classList.toggle("dark", !!settings.darkMode);
 }
 
 function renderDefaults() {

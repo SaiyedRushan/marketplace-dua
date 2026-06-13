@@ -35,6 +35,7 @@ function getDefaultSettings() {
   return {
     enabled: true,
     frequency: "session", // "always" | "session" | "daily"
+    darkMode: false,       // dark theme for the popup and the reminder modal
     disabledDefaults: [],  // ids of built-in marketplaces the user turned off
     customSites: []        // user-added patterns, e.g. "shop.example.com"
   };

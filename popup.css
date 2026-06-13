@@ -1,0 +1,155 @@
+:root {
+  --green: #0e7c5a;
+  --green-dark: #0b6a4d;
+  --ink: #1c2e27;
+  --muted: #768079;
+  --bg: #fbfaf5;
+  --line: rgba(14, 124, 90, 0.16);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 360px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  background: linear-gradient(180deg, rgba(14, 124, 90, 0.08), rgba(14, 124, 90, 0));
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 11px; }
+.logo { width: 34px; height: 34px; }
+.header h1 { font-size: 15.5px; font-weight: 680; letter-spacing: -0.01em; }
+.tagline { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+
+/* On/off switch */
+.switch { position: relative; display: inline-block; width: 42px; height: 24px; flex: none; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #cfd6d1;
+  border-radius: 999px;
+  transition: background 0.18s;
+}
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.18s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.switch input:checked + .slider { background: var(--green); }
+.switch input:checked + .slider::before { transform: translateX(18px); }
+
+/* Body */
+.body { padding: 14px 18px 6px; }
+.body.disabled { opacity: 0.45; pointer-events: none; }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.row-label { font-weight: 600; }
+.select {
+  font: inherit;
+  color: var(--ink);
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+}
+.select:focus { outline: 2px solid rgba(14, 124, 90, 0.35); outline-offset: 1px; }
+
+.block { margin-bottom: 16px; }
+.block-title { font-weight: 660; margin-bottom: 3px; }
+.hint { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.hint code {
+  background: rgba(14, 124, 90, 0.09);
+  padding: 1px 5px;
+  border-radius: 5px;
+  font-size: 11.5px;
+}
+
+/* Lists */
+.list { display: flex; flex-direction: column; gap: 2px; }
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 6px;
+  border-radius: 9px;
+}
+.item:hover { background: rgba(14, 124, 90, 0.05); }
+.item label { flex: 1; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+.item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--green); cursor: pointer; }
+.item .name { line-height: 1.2; }
+
+.empty { font-size: 12.5px; color: var(--muted); padding: 6px 4px; font-style: italic; }
+
+.remove {
+  border: none;
+  background: transparent;
+  color: #b04a4a;
+  cursor: pointer;
+  font-size: 12.5px;
+  padding: 4px 8px;
+  border-radius: 7px;
+}
+.remove:hover { background: rgba(176, 74, 74, 0.1); }
+
+/* Add row */
+.add-row { display: flex; gap: 8px; margin-bottom: 10px; }
+.add-input {
+  flex: 1;
+  font: inherit;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+.add-input:focus { outline: 2px solid rgba(14, 124, 90, 0.35); outline-offset: 1px; }
+.add-btn {
+  border: none;
+  background: var(--green);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  padding: 0 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.add-btn:hover { background: var(--green-dark); }
+
+/* Footer */
+.footer {
+  padding: 9px 18px;
+  border-top: 1px solid var(--line);
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+#status { font-size: 12px; color: var(--green); transition: opacity 0.3s; }

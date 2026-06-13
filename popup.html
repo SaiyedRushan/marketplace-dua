@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketplace Du'a</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="brand">
+        <img src="icons/icon48.png" alt="" class="logo" />
+        <div>
+          <h1>Marketplace Du'a</h1>
+          <p class="tagline">A reminder before you shop</p>
+        </div>
+      </div>
+      <label class="switch" title="Turn reminders on or off">
+        <input type="checkbox" id="enabled" />
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <main class="body" id="body">
+      <section class="row">
+        <label for="frequency" class="row-label">Show reminder</label>
+        <select id="frequency" class="select"></select>
+      </section>
+
+      <section class="block">
+        <div class="block-title">Built-in marketplaces</div>
+        <div class="hint">Untick any you don't want reminders for.</div>
+        <div id="defaults" class="list"></div>
+      </section>
+
+      <section class="block">
+        <div class="block-title">Your custom sites</div>
+        <div class="hint">Add any other shopping site, e.g. <code>shop.example.com</code>.</div>
+        <form id="add-form" class="add-row">
+          <input
+            type="text"
+            id="add-input"
+            class="add-input"
+            placeholder="Add a website…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button type="submit" class="add-btn">Add</button>
+        </form>
+        <div id="custom" class="list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span id="status"></span>
+    </footer>
+
+    <script src="defaults.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -3,131 +3,446 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marketplace Du'a — Privacy Policy</title>
-    <meta name="description" content="Privacy policy for the Marketplace Du'a Chrome extension. No data is collected." />
+    <title>Marketplace Du'a — Remember Allah before you shop</title>
+    <meta name="description" content="A quiet, minimalist Chrome extension that reminds you to recite the du'a for entering the marketplace — on Amazon, eBay, Facebook Marketplace, and any site you add." />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Amiri:ital@0;1&display=swap" rel="stylesheet" />
+    <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+
     <style>
       :root {
-        --green: #0e7c5a;
-        --ink: #1c2e27;
-        --muted: #5e6b64;
-        --bg: #fbfaf5;
-        --line: rgba(14, 124, 90, 0.16);
+        --paper: #f5efe1;
+        --paper-2: #efe6d3;
+        --card: #fbf7ec;
+        --ink: #1f2e27;
+        --ink-soft: #56655d;
+        --emerald: #0e5e46;
+        --emerald-2: #0c7a59;
+        --gold: #b3873c;
+        --gold-soft: rgba(179, 135, 60, 0.45);
+        --line: rgba(31, 46, 39, 0.12);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Hanken Grotesk", -apple-system, sans-serif;
+        --arabic: "Amiri", serif;
+        --shadow: 0 30px 70px -30px rgba(14, 60, 44, 0.45);
       }
+
       * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background: var(--bg);
+        font-family: var(--body);
         color: var(--ink);
-        line-height: 1.65;
-        padding: 48px 20px 80px;
+        background-color: var(--paper);
+        background-image:
+          radial-gradient(120% 80% at 50% -10%, rgba(12, 122, 89, 0.10), transparent 60%),
+          radial-gradient(80% 60% at 100% 0%, rgba(179, 135, 60, 0.08), transparent 55%);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
       }
-      .wrap { max-width: 720px; margin: 0 auto; }
-      header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
-      header img { width: 44px; height: 44px; }
-      h1 { font-size: 24px; letter-spacing: -0.01em; }
-      .updated { color: var(--muted); font-size: 13.5px; margin-bottom: 28px; }
-      h2 {
-        font-size: 17px;
-        margin: 28px 0 8px;
-        padding-top: 18px;
-        border-top: 1px solid var(--line);
-        color: var(--green);
+      /* paper grain */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.5;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       }
-      p, li { font-size: 15px; color: #34433c; }
-      ul { margin: 8px 0 0 22px; }
-      li { margin-bottom: 6px; }
-      strong { color: var(--ink); }
-      a { color: #0b6a4d; }
-      .lede {
-        font-size: 16px;
-        background: rgba(14, 124, 90, 0.07);
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 16px 18px;
-        margin-bottom: 8px;
+
+      a { color: inherit; text-decoration: none; }
+      .wrap { width: min(1120px, 100% - 44px); margin-inline: auto; }
+      section { position: relative; z-index: 2; }
+
+      /* ---------- Nav ---------- */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(10px);
+        background: rgba(245, 239, 225, 0.72);
+        border-bottom: 1px solid var(--line);
       }
-      footer { margin-top: 36px; color: var(--muted); font-size: 13px; }
+      .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+      .brand { display: flex; align-items: center; gap: 11px; font-family: var(--display); font-size: 22px; font-weight: 600; letter-spacing: 0.01em; }
+      .brand img { width: 30px; height: 30px; }
+      .nav-links { display: flex; align-items: center; gap: 30px; }
+      .nav-links a { font-size: 14.5px; font-weight: 500; color: var(--ink-soft); transition: color 0.2s; }
+      .nav-links a:hover { color: var(--emerald); }
+
+      .btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-family: var(--body); font-weight: 600; font-size: 14.5px;
+        padding: 11px 20px; border-radius: 999px; cursor: pointer;
+        border: 1px solid transparent; transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+      }
+      .btn-primary { background: var(--emerald); color: #fdfaf1; box-shadow: 0 10px 24px -10px rgba(14, 94, 70, 0.7); }
+      .btn-primary:hover { background: var(--emerald-2); transform: translateY(-1px); box-shadow: 0 16px 30px -12px rgba(14, 94, 70, 0.75); }
+      .btn-ghost { background: transparent; border-color: var(--line); color: var(--ink); }
+      .btn-ghost:hover { border-color: var(--gold); color: var(--emerald); }
+      .btn-light { background: #fdfaf1; color: var(--emerald); }
+      .btn-light:hover { transform: translateY(-1px); box-shadow: 0 16px 34px -14px rgba(0,0,0,0.4); }
+
+      /* ---------- Hero ---------- */
+      .hero { padding: 70px 0 84px; text-align: center; }
+      .arch {
+        position: relative;
+        width: min(360px, 82vw);
+        aspect-ratio: 360 / 470;
+        margin: 0 auto 30px;
+      }
+      .arch-frame { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .arch-content {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        padding: 64px 46px 40px; text-align: center;
+      }
+      .arch-crescent { width: 50px; height: 50px; margin-bottom: 18px; animation: pop 0.9s 0.1s cubic-bezier(0.16,1,0.3,1) both; }
+      .arch-eyebrow {
+        font-size: 11.5px; letter-spacing: 0.32em; text-transform: uppercase;
+        color: var(--gold); font-weight: 600; margin-bottom: 16px;
+        animation: rise 0.8s 0.25s both;
+      }
+      .arch-arabic {
+        font-family: var(--arabic); direction: rtl;
+        font-size: clamp(30px, 8vw, 40px); line-height: 1.5; color: var(--emerald);
+        animation: rise 0.9s 0.4s both;
+      }
+      .arch-translit {
+        font-family: var(--display); font-style: italic; font-size: 17px;
+        color: var(--ink-soft); margin-top: 12px; animation: rise 0.9s 0.55s both;
+      }
+
+      .hero h1 {
+        font-family: var(--display); font-weight: 500;
+        font-size: clamp(38px, 6.6vw, 66px); line-height: 1.04; letter-spacing: -0.01em;
+        max-width: 14ch; margin: 0 auto; animation: rise 0.9s 0.6s both;
+      }
+      .hero h1 em { font-style: italic; color: var(--emerald); }
+      .hero .sub {
+        max-width: 56ch; margin: 22px auto 0; font-size: 17.5px; color: var(--ink-soft);
+        animation: rise 0.9s 0.72s both;
+      }
+      .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 34px; animation: rise 0.9s 0.84s both; }
+      .hero-note { margin-top: 18px; font-size: 13.5px; color: var(--ink-soft); letter-spacing: 0.02em; animation: rise 0.9s 0.96s both; }
+      .hero-note b { color: var(--gold); font-weight: 600; }
+
+      /* ---------- Ornament divider ---------- */
+      .ornament { display: flex; align-items: center; justify-content: center; gap: 16px; color: var(--gold-soft); margin: 0 auto; }
+      .ornament::before, .ornament::after { content: ""; height: 1px; width: min(120px, 22vw); background: linear-gradient(to var(--dir, right), transparent, var(--gold-soft)); }
+      .ornament::after { --dir: left; }
+      .ornament .diamond { width: 9px; height: 9px; background: var(--gold); transform: rotate(45deg); }
+
+      /* ---------- Section headings ---------- */
+      .sec-head { text-align: center; max-width: 60ch; margin: 0 auto 52px; }
+      .sec-eyebrow { font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+      .sec-head h2 { font-family: var(--display); font-weight: 500; font-size: clamp(30px, 4.6vw, 46px); line-height: 1.1; margin-top: 12px; }
+      .sec-head p { margin-top: 14px; font-size: 17px; color: var(--ink-soft); }
+
+      /* ---------- Features ---------- */
+      .features { padding: 30px 0 90px; }
+      .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .feature {
+        background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+        padding: 28px 26px; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      }
+      .feature:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--gold-soft); }
+      .feature .ic {
+        width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+        background: rgba(14, 94, 70, 0.09); color: var(--emerald); margin-bottom: 18px;
+      }
+      .feature h3 { font-family: var(--display); font-size: 24px; font-weight: 600; }
+      .feature p { margin-top: 8px; font-size: 15px; color: var(--ink-soft); }
+
+      /* ---------- Du'as ---------- */
+      .duas { padding: 70px 0 90px; background: var(--paper-2); border-block: 1px solid var(--line); }
+      .dua-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+      .dua-card {
+        background: var(--card); border: 1px solid var(--line); border-radius: 22px;
+        padding: 36px 34px; position: relative; overflow: hidden;
+      }
+      .dua-card::before {
+        content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
+        background: linear-gradient(90deg, var(--emerald), var(--gold));
+      }
+      .dua-card .tag { font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+      .dua-card .ar { font-family: var(--arabic); direction: rtl; font-size: 27px; line-height: 1.9; color: var(--emerald); margin: 16px 0 18px; }
+      .dua-card .tr { font-family: var(--display); font-style: italic; font-size: 16px; color: var(--ink-soft); }
+      .dua-card .en { font-size: 15px; color: var(--ink); margin-top: 14px; }
+      .dua-card .src {
+        display: inline-flex; align-items: center; gap: 6px; margin-top: 20px;
+        font-size: 13.5px; font-weight: 600; color: var(--emerald);
+        border-bottom: 1px solid var(--gold-soft); padding-bottom: 2px; transition: color 0.2s;
+      }
+      .dua-card .src:hover { color: var(--gold); }
+
+      /* ---------- Showcase ---------- */
+      .showcase { padding: 84px 0; text-align: center; }
+      .shot {
+        margin: 0 auto; max-width: 920px; border-radius: 20px; overflow: hidden;
+        border: 1px solid var(--line); box-shadow: var(--shadow); line-height: 0;
+        background: #11201b;
+      }
+      .shot img { width: 100%; height: auto; display: block; }
+
+      /* ---------- Final CTA ---------- */
+      .cta {
+        margin: 0 0 0; padding: 0;
+      }
+      .cta-band {
+        position: relative; overflow: hidden;
+        background: var(--emerald);
+        color: #f3ede0; border-radius: 28px; padding: 70px 40px; text-align: center;
+        box-shadow: var(--shadow);
+      }
+      .cta-band::after {
+        content: ""; position: absolute; inset: 0; opacity: 0.16; pointer-events: none;
+        background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0);
+        background-size: 26px 26px;
+      }
+      .cta-band h2 { position: relative; font-family: var(--display); font-weight: 500; font-size: clamp(32px, 5vw, 52px); line-height: 1.08; max-width: 18ch; margin: 0 auto; }
+      .cta-band p { position: relative; margin-top: 14px; color: rgba(243, 237, 224, 0.82); font-size: 17px; }
+      .cta-band .hero-cta { margin-top: 30px; }
+      .cta-section { padding: 40px 0 90px; }
+
+      /* ---------- Footer ---------- */
+      footer { border-top: 1px solid var(--line); padding: 48px 0 60px; }
+      .foot { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+      .foot .brand { font-size: 20px; }
+      .foot-tag { margin-top: 10px; font-size: 14px; color: var(--ink-soft); max-width: 32ch; }
+      .foot-links { display: flex; gap: 40px; flex-wrap: wrap; }
+      .foot-col h4 { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+      .foot-col a { display: block; font-size: 14.5px; color: var(--ink-soft); margin-bottom: 9px; transition: color 0.2s; }
+      .foot-col a:hover { color: var(--emerald); }
+      .foot-bottom { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); font-family: var(--display); font-style: italic; font-size: 16px; color: var(--ink-soft); text-align: center; }
+
+      /* ---------- Reveal on scroll ---------- */
+      .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+      .reveal.in { opacity: 1; transform: none; }
+
+      @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+      @keyframes pop { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: none; } }
+
+      @media (max-width: 860px) {
+        .feature-grid { grid-template-columns: 1fr 1fr; }
+        .dua-grid { grid-template-columns: 1fr; }
+        .nav-links a:not(.btn) { display: none; }
+      }
+      @media (max-width: 560px) {
+        .feature-grid { grid-template-columns: 1fr; }
+        .hero { padding: 44px 0 60px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation: none !important; transition: none !important; }
+        .reveal { opacity: 1; transform: none; }
+      }
     </style>
   </head>
   <body>
-    <div class="wrap">
-      <header>
-        <img src="../icons/icon128.png" alt="Marketplace Du'a icon" />
-        <h1>Marketplace Du'a — Privacy Policy</h1>
-      </header>
-      <p class="updated">Last updated: June 13, 2026</p>
+    <!-- ====== NAV ====== -->
+    <nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top"><img src="assets/icon.png" alt="" />Marketplace Du'a</a>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#duas">The du'as</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="https://github.com/SaiyedRushan/marketplace-dua" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn btn-primary" data-store-link href="#">Add to Chrome</a>
+        </div>
+      </div>
+    </nav>
 
-      <p class="lede">
-        <strong>Marketplace Du'a does not collect, store, transmit, or sell any
-        personal data.</strong> Everything the extension does happens locally in
-        your own browser.
-      </p>
+    <!-- ====== HERO ====== -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <div class="arch">
+          <svg class="arch-frame" viewBox="0 0 360 470" fill="none" aria-hidden="true">
+            <path d="M30 460 L30 200 Q30 54 180 30 Q330 54 330 200 L330 460"
+              stroke="var(--gold)" stroke-width="1.5" opacity="0.65" />
+            <path d="M44 460 L44 202 Q44 70 180 47 Q316 70 316 202 L316 460"
+              stroke="var(--emerald)" stroke-width="1" opacity="0.28" />
+          </svg>
+          <div class="arch-content">
+            <svg class="arch-crescent" viewBox="0 0 100 100" aria-hidden="true">
+              <circle cx="50" cy="50" r="50" fill="#0e5e46" />
+              <path d="M50 18 a32 32 0 1 0 0 64 a26 26 0 1 1 0 -64Z" fill="#f5efe1" />
+            </svg>
+            <div class="arch-eyebrow">Before you shop</div>
+            <div class="arch-arabic">لَا إِلَهَ إِلَّا اللَّهُ</div>
+            <div class="arch-translit">bismillāh — enter with His name</div>
+          </div>
+        </div>
 
-      <h2>What the extension stores</h2>
-      <p>
-        The extension saves only your own settings so it can work the way you
-        configured it:
-      </p>
-      <ul>
-        <li>Whether reminders are turned on or off</li>
-        <li>How often the reminder is shown</li>
-        <li>Your dark-mode preference</li>
-        <li>Which built-in marketplaces are enabled or disabled</li>
-        <li>Any custom websites you add</li>
-      </ul>
-      <p>
-        This is kept using Chrome's <code>storage</code> API. If you are signed
-        in to Chrome with sync enabled, these settings may sync across your own
-        devices through your Google account. They are never sent to the
-        developer or any third party.
-      </p>
+        <h1>Remember Allah <em>before</em> you enter the marketplace.</h1>
+        <p class="sub">
+          A quiet, minimalist browser extension that brings back the sunnah of
+          du'a — gently prompting you to turn to Allah the moment you open
+          Amazon, eBay, Facebook Marketplace, or any shop you choose.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" data-store-link href="#">＋ Add to Chrome</a>
+          <a class="btn btn-ghost" href="https://github.com/SaiyedRushan/marketplace-dua" target="_blank" rel="noopener">View source on GitHub</a>
+        </div>
+        <p class="hero-note"><b>Free</b> · Open source · No accounts · No data collected</p>
+      </div>
+    </section>
 
-      <h2>Website access</h2>
-      <p>
-        To know when to show a reminder, the extension checks the address
-        (hostname) of the page you are visiting against your list of shopping
-        sites. It does <strong>not</strong> read, record, modify, or transmit the
-        content of any web page, and it does nothing on pages that are not on
-        your list.
-      </p>
+    <div class="ornament"><span class="diamond"></span></div>
 
-      <h2>No tracking</h2>
-      <p>
-        There are no analytics, no advertising, no trackers, no accounts, and no
-        external servers. The extension makes no network requests of its own.
-      </p>
+    <!-- ====== FEATURES ====== -->
+    <section class="features" id="features">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="sec-eyebrow">Mindful by design</div>
+          <h2>Small reminders, lasting habit.</h2>
+          <p>Everything you need to keep Allah in mind before a purchase — and nothing you don't.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature reveal">
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M9 8h6M9 12h6"/></svg>
+            </div>
+            <h3>Two authentic du'as</h3>
+            <p>The du'a for entering the marketplace, and the Prophet's ﷺ reminder to ask Allah for every need — each linked to its source on sunnah.com.</p>
+          </div>
+          <div class="feature reveal">
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9M3 9h18"/></svg>
+            </div>
+            <h3>Knows the big stores</h3>
+            <p>Amazon, eBay, Facebook Marketplace, Etsy, Temu, SHEIN and 10 more are recognised automatically — toggle any of them off.</p>
+          </div>
+          <div class="feature reveal">
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+            </div>
+            <h3>Add your own sites</h3>
+            <p>Shop somewhere else? Add any website in a single click and the reminder follows you there.</p>
+          </div>
+          <div class="feature reveal">
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+            <h3>On your terms</h3>
+            <p>Show it on every visit, once per browsing session, or just once a day. You set the rhythm.</p>
+          </div>
+          <div class="feature reveal">
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            </div>
+            <h3>Light &amp; dark</h3>
+            <p>A calm interface that sits gently over any page, in a warm light theme or a restful dark one.</p>
+          </div>
+          <div class="feature reveal">
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9.5 12l2 2 3.5-4"/></svg>
+            </div>
+            <h3>Truly private</h3>
+            <p>No accounts, no tracking, no servers, no network requests. Everything stays in your own browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <h2>External links</h2>
-      <p>
-        Each du'a links to its source on
-        <a href="https://sunnah.com" target="_blank" rel="noopener">sunnah.com</a>.
-        Opening one of these links is no different from clicking any other link
-        and is governed by that website's own privacy policy.
-      </p>
+    <!-- ====== DU'AS ====== -->
+    <section class="duas" id="duas">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="sec-eyebrow">The words</div>
+          <h2>What it reminds you to say.</h2>
+          <p>Two short reminders shown side by side, with a link to verify each on sunnah.com.</p>
+        </div>
+        <div class="dua-grid">
+          <div class="dua-card reveal">
+            <div class="tag">Entering the marketplace</div>
+            <p class="ar">لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، يُحْيِي وَيُمِيتُ، وَهُوَ حَيٌّ لَا يَمُوتُ، بِيَدِهِ الْخَيْرُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ</p>
+            <p class="tr">Lā ilāha illa-llāhu waḥdahu lā sharīka lah, lahu-l-mulku wa lahu-l-ḥamd, yuḥyī wa yumīt, wa huwa ḥayyun lā yamūt, bi-yadihi-l-khayr, wa huwa ʿalā kulli shayʾin qadīr.</p>
+            <p class="en">"There is none worthy of worship but Allah alone, with no partner. His is the dominion and His is all praise. He gives life and causes death, and He is the Ever-Living who never dies. In His Hand is all good, and He has power over all things."</p>
+            <a class="src" href="https://sunnah.com/tirmidhi:3428" target="_blank" rel="noopener">Jāmiʿ at-Tirmidhī 3428 ↗</a>
+          </div>
+          <div class="dua-card reveal">
+            <div class="tag">Ask Allah — even for small things</div>
+            <p class="ar">لِيَسْأَلْ أَحَدُكُمْ رَبَّهُ حَاجَتَهُ حَتَّى يَسْأَلَهُ الْمِلْحَ، وَحَتَّى يَسْأَلَهُ شِسْعَ نَعْلِهِ إِذَا انْقَطَعَ</p>
+            <p class="tr">Li-yasʾal aḥadukum rabbahu ḥājatahu, ḥattā yasʾalahu-l-milḥa, wa ḥattā yasʾalahu shisʿa naʿlihi idhā-nqaṭaʿa.</p>
+            <p class="en">"Let one of you ask his Lord for his every need, until he asks Him for salt, and asks Him for the strap of his sandal when it breaks."</p>
+            <a class="src" href="https://sunnah.com/tirmidhi:3604j" target="_blank" rel="noopener">Jāmiʿ at-Tirmidhī 3604 ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <h2>Children's privacy</h2>
-      <p>
-        Because no personal data is collected from anyone, the extension is safe
-        for users of all ages.
-      </p>
+    <!-- ====== SHOWCASE ====== -->
+    <section class="showcase">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="sec-eyebrow">In action</div>
+          <h2>A gentle pause, right on the page.</h2>
+          <p>The reminder appears the moment you land on a shopping site, then steps aside with a tap.</p>
+        </div>
+        <div class="shot reveal"><img src="assets/screenshot-dark.png" alt="The Marketplace Du'a reminder shown over Amazon" /></div>
+      </div>
+    </section>
 
-      <h2>Changes to this policy</h2>
-      <p>
-        If this policy changes, the updated version will be posted on this page
-        with a new "last updated" date.
-      </p>
+    <!-- ====== FINAL CTA ====== -->
+    <section class="cta-section">
+      <div class="wrap">
+        <div class="cta-band reveal">
+          <h2>Keep Allah in mind before every purchase.</h2>
+          <p>Install it once, and let the reminder do the rest — quietly, on your terms.</p>
+          <div class="hero-cta">
+            <a class="btn btn-light" data-store-link href="#">＋ Add to Chrome — it's free</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <h2>Contact</h2>
-      <p>
-        Questions about this policy? Contact
-        <a href="mailto:rushan52@gmail.com">rushan52@gmail.com</a>.
-      </p>
+    <!-- ====== FOOTER ====== -->
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <div>
+            <div class="brand"><img src="assets/icon.png" alt="" style="width:26px;height:26px" />Marketplace Du'a</div>
+            <p class="foot-tag">A free reminder to recite the du'a before entering a marketplace.</p>
+          </div>
+          <div class="foot-links">
+            <div class="foot-col">
+              <h4>Product</h4>
+              <a href="#features">Features</a>
+              <a href="#duas">The du'as</a>
+              <a data-store-link href="#">Add to Chrome</a>
+            </div>
+            <div class="foot-col">
+              <h4>More</h4>
+              <a href="privacy.html">Privacy policy</a>
+              <a href="https://github.com/SaiyedRushan/marketplace-dua" target="_blank" rel="noopener">Source code</a>
+              <a href="https://sunnah.com" target="_blank" rel="noopener">sunnah.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="foot-bottom">May Allah make your transactions blessed.</div>
+      </div>
+    </footer>
 
-      <footer>
-        Marketplace Du'a is a free, open-source extension.
-        Source code:
-        <a href="https://github.com/SaiyedRushan/marketplace-dua" target="_blank" rel="noopener">github.com/SaiyedRushan/marketplace-dua</a>.
-      </footer>
-    </div>
+    <script>
+      // ▼▼▼ When the extension is published, paste your Chrome Web Store URL here ▼▼▼
+      var STORE_URL = "https://github.com/SaiyedRushan/marketplace-dua#install-load-unpacked";
+      // ▲▲▲ (until then, the install buttons point to the GitHub install guide) ▲▲▲
+      document.querySelectorAll("[data-store-link]").forEach(function (a) {
+        a.setAttribute("href", STORE_URL);
+        if (STORE_URL.indexOf("chromewebstore") === -1) a.setAttribute("target", "_blank");
+      });
+
+      // Reveal-on-scroll
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+    </script>
   </body>
 </html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy — Marketplace Du'a</title>
+    <meta name="description" content="Privacy policy for the Marketplace Du'a Chrome extension. No personal data is collected." />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --paper: #f5efe1;
+        --card: #fbf7ec;
+        --ink: #1f2e27;
+        --ink-soft: #56655d;
+        --emerald: #0e5e46;
+        --emerald-2: #0c7a59;
+        --gold: #b3873c;
+        --gold-soft: rgba(179, 135, 60, 0.45);
+        --line: rgba(31, 46, 39, 0.12);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Hanken Grotesk", -apple-system, sans-serif;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: var(--body); color: var(--ink); background-color: var(--paper);
+        background-image: radial-gradient(120% 70% at 50% -10%, rgba(12,122,89,0.08), transparent 60%);
+        line-height: 1.65; -webkit-font-smoothing: antialiased;
+      }
+      body::before {
+        content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.5;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      }
+      a { color: inherit; }
+      .wrap { width: min(760px, 100% - 44px); margin-inline: auto; position: relative; z-index: 2; }
+
+      nav {
+        position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px);
+        background: rgba(245, 239, 225, 0.72); border-bottom: 1px solid var(--line);
+      }
+      .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; width: min(1120px, 100% - 44px); margin-inline: auto; }
+      .brand { display: flex; align-items: center; gap: 11px; font-family: var(--display); font-size: 22px; font-weight: 600; }
+      .brand img { width: 30px; height: 30px; }
+      .back { font-size: 14.5px; font-weight: 600; color: var(--emerald); }
+      .back:hover { color: var(--gold); }
+
+      header.page { padding: 70px 0 30px; }
+      .eyebrow { font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+      header.page h1 { font-family: var(--display); font-weight: 600; font-size: clamp(38px, 6vw, 56px); line-height: 1.05; margin-top: 12px; }
+      .updated { color: var(--ink-soft); font-size: 14px; margin-top: 14px; }
+
+      .lede {
+        font-size: 18px; background: var(--card); border: 1px solid var(--line);
+        border-radius: 16px; padding: 22px 24px; margin: 30px 0 10px; line-height: 1.55;
+      }
+      .lede strong { color: var(--emerald); }
+
+      article { padding-bottom: 70px; }
+      h2 {
+        font-family: var(--display); font-weight: 600; color: var(--emerald);
+        font-size: 26px; margin: 38px 0 10px; padding-top: 26px; border-top: 1px solid var(--line);
+      }
+      p, li { font-size: 16px; color: #36443d; }
+      ul { margin: 10px 0 0 22px; }
+      li { margin-bottom: 7px; }
+      strong { color: var(--ink); }
+      code { background: rgba(14,94,70,0.08); padding: 1px 6px; border-radius: 6px; font-size: 14px; }
+      article a { color: var(--emerald-2); font-weight: 600; }
+
+      footer { border-top: 1px solid var(--line); padding: 34px 0 50px; text-align: center; }
+      .foot-bottom { font-family: var(--display); font-style: italic; font-size: 16px; color: var(--ink-soft); }
+      .foot-links { margin-bottom: 14px; display: flex; gap: 26px; justify-content: center; flex-wrap: wrap; }
+      .foot-links a { font-size: 14.5px; color: var(--ink-soft); font-weight: 500; }
+      .foot-links a:hover { color: var(--emerald); }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-inner">
+        <a class="brand" href="index.html"><img src="assets/icon.png" alt="" />Marketplace Du'a</a>
+        <a class="back" href="index.html">← Back to home</a>
+      </div>
+    </nav>
+
+    <header class="page">
+      <div class="wrap">
+        <div class="eyebrow">Legal</div>
+        <h1>Privacy Policy</h1>
+        <p class="updated">Last updated: June 13, 2026</p>
+      </div>
+    </header>
+
+    <article>
+      <div class="wrap">
+        <p class="lede">
+          <strong>Marketplace Du'a does not collect, store, transmit, or sell any
+          personal data.</strong> Everything the extension does happens locally
+          in your own browser.
+        </p>
+
+        <h2>What the extension stores</h2>
+        <p>The extension saves only your own settings, so it can work the way you configured it:</p>
+        <ul>
+          <li>Whether reminders are turned on or off</li>
+          <li>How often the reminder is shown</li>
+          <li>Your dark-mode preference</li>
+          <li>Which built-in marketplaces are enabled or disabled</li>
+          <li>Any custom websites you add</li>
+        </ul>
+        <p>
+          This is kept using Chrome's <code>storage</code> API. If you are signed
+          in to Chrome with sync enabled, these settings may sync across your own
+          devices through your Google account. They are never sent to the
+          developer or any third party.
+        </p>
+
+        <h2>Website access</h2>
+        <p>
+          To know when to show a reminder, the extension checks the address
+          (hostname) of the page you are visiting against your list of shopping
+          sites. It does <strong>not</strong> read, record, modify, or transmit
+          the content of any web page, and it does nothing on pages that are not
+          on your list.
+        </p>
+
+        <h2>No tracking</h2>
+        <p>
+          There are no analytics, no advertising, no trackers, no accounts, and
+          no external servers. The extension makes no network requests of its own.
+        </p>
+
+        <h2>External links</h2>
+        <p>
+          Each du'a links to its source on
+          <a href="https://sunnah.com" target="_blank" rel="noopener">sunnah.com</a>.
+          Opening one of these links is no different from clicking any other link
+          and is governed by that website's own privacy policy.
+        </p>
+
+        <h2>Children's privacy</h2>
+        <p>
+          Because no personal data is collected from anyone, the extension is safe
+          for users of all ages.
+        </p>
+
+        <h2>Changes to this policy</h2>
+        <p>
+          If this policy changes, the updated version will be posted on this page
+          with a new "last updated" date.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions about this policy? Contact
+          <a href="mailto:rushan52@gmail.com">rushan52@gmail.com</a>.
+        </p>
+      </div>
+    </article>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot-links">
+          <a href="index.html">Home</a>
+          <a href="index.html#features">Features</a>
+          <a href="https://github.com/SaiyedRushan/marketplace-dua" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="foot-bottom">May Allah make your transactions blessed.</div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -34,7 +34,7 @@ const FREQUENCY_OPTIONS = [
 function getDefaultSettings() {
   return {
     enabled: true,
-    frequency: "session", // "always" | "session" | "daily"
+    frequency: "always", // "always" | "session" | "daily"
     darkMode: false,       // dark theme for the popup and the reminder modal
     disabledDefaults: [],  // ids of built-in marketplaces the user turned off
     removedDefaults: [],   // ids of built-in marketplaces the user removed from the list

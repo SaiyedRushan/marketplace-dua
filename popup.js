@@ -31,6 +31,17 @@ function init() {
   chrome.storage.sync.get(getDefaultSettings(), (items) => {
     settings = Object.assign(getDefaultSettings(), items);
     render();
+    // Backstop: complete any add whose popup closed during the prompt.
+    finalizePendingCustom().catch(() => {});
+  });
+
+  // Keep the custom list live if the service worker finishes an add/remove
+  // (or another popup/device changes it) while this popup is open.
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === "sync" && changes.customSites) {
+      settings.customSites = changes.customSites.newValue || [];
+      renderCustom();
+    }
   });
 
   el.enabled.addEventListener("change", () => {
@@ -166,8 +177,8 @@ function renderCustom() {
         enable.textContent = "Enable";
         enable.addEventListener("click", () => {
           chrome.permissions.request({ origins: [origin] }, (granted) => {
-            if (!granted) return flash("Permission needed for " + pattern);
-            registerCustom(pattern, () => {
+            if (chrome.runtime.lastError || !granted) return flash("Permission needed for " + pattern);
+            registerCustomScript(pattern).then(() => {
               flash("Enabled " + pattern);
               renderCustom();
             });
@@ -177,24 +188,6 @@ function renderCustom() {
       });
     }
   }
-}
-
-// Register a content script for a custom site (idempotent).
-function registerCustom(pattern, done) {
-  const origin = customOriginPattern(pattern);
-  const id = customScriptId(pattern);
-  if (!origin) return done && done();
-
-  chrome.scripting.getRegisteredContentScripts({ ids: [id] }, (existing) => {
-    if (existing && existing.length) return done && done();
-    chrome.scripting.registerContentScripts(
-      [{ id, matches: [origin], js: ["defaults.js", "content.js"], runAt: "document_idle" }],
-      () => {
-        void chrome.runtime.lastError; // ignore "already registered" races
-        done && done();
-      }
-    );
-  });
 }
 
 function toggleDefault(id, enabled) {
@@ -233,32 +226,36 @@ function addCustom(raw) {
     return;
   }
 
-  // Ask for access to just this site, then register its content script.
+  // Record the intent FIRST (synchronously kick off the write), so the service
+  // worker can finish the add even if the permission prompt closes this popup.
+  // permissions.request must be called directly in this user-gesture handler.
   const origin = customOriginPattern(pattern);
+  chrome.storage.local.set({ mpduaPending: pattern });
   chrome.permissions.request({ origins: [origin] }, (granted) => {
-    if (!granted) {
+    if (chrome.runtime.lastError || !granted) {
+      chrome.storage.local.remove("mpduaPending");
       flash("Permission needed to add " + pattern);
       return;
     }
-    registerCustom(pattern, () => {
-      settings.customSites = sites.concat(pattern);
-      el.addInput.value = "";
-      save("Added " + pattern);
-      renderCustom();
+    // If the popup is still alive, finish here; otherwise the worker does it.
+    finalizePendingCustom().then((added) => {
+      if (added) {
+        el.addInput.value = "";
+        flash("Added " + added);
+      }
     });
   });
 }
 
 function removeCustom(pattern) {
   const origin = customOriginPattern(pattern);
-  const id = customScriptId(pattern);
-
-  chrome.scripting.unregisterContentScripts({ ids: [id] }, () => {
-    void chrome.runtime.lastError; // fine if it wasn't registered
-    if (origin) chrome.permissions.remove({ origins: [origin] }, () => void chrome.runtime.lastError);
+  unregisterCustomScript(pattern).then(() => {
+    if (origin) chrome.permissions.remove({ origins: [origin] });
     settings.customSites = (settings.customSites || []).filter((p) => p !== pattern);
-    save("Removed " + pattern);
-    renderCustom();
+    chrome.storage.sync.set({ customSites: settings.customSites }, () => {
+      flash("Removed " + pattern);
+      renderCustom();
+    });
   });
 }
 

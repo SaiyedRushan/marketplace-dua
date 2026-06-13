@@ -43,5 +43,16 @@ async function reconcileCustomSites() {
   }
 }
 
-chrome.runtime.onInstalled.addListener(reconcileCustomSites);
-chrome.runtime.onStartup.addListener(reconcileCustomSites);
+// When the user grants a site's permission from the popup, finish the add here
+// (the popup may have closed when the permission prompt opened), then make sure
+// every granted custom site has a registered script.
+chrome.permissions.onAdded.addListener(() => {
+  finalizePendingCustom().then(() => reconcileCustomSites());
+});
+
+chrome.runtime.onInstalled.addListener(() => {
+  finalizePendingCustom().then(() => reconcileCustomSites());
+});
+chrome.runtime.onStartup.addListener(() => {
+  finalizePendingCustom().then(() => reconcileCustomSites());
+});

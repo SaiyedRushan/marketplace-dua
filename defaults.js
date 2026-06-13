@@ -66,6 +66,52 @@ function customScriptId(input) {
   return "mpdua_" + d.replace(/[^a-z0-9]/g, "_");
 }
 
+// Dynamically (un)register a content script for a custom site. Shared by the
+// popup and the service worker. Idempotent; never rejects.
+function registerCustomScript(pattern) {
+  const origin = customOriginPattern(pattern);
+  const id = customScriptId(pattern);
+  if (!origin) return Promise.resolve();
+  return chrome.scripting
+    .getRegisteredContentScripts({ ids: [id] })
+    .then((existing) => {
+      if (existing && existing.length) return;
+      return chrome.scripting.registerContentScripts([
+        { id, matches: [origin], js: ["defaults.js", "content.js"], runAt: "document_idle" }
+      ]);
+    })
+    .catch(() => {});
+}
+
+function unregisterCustomScript(pattern) {
+  return chrome.scripting.unregisterContentScripts({ ids: [customScriptId(pattern)] }).catch(() => {});
+}
+
+// Completes a pending custom-site add once its host permission is granted —
+// registers the script and saves the site. Safe to call from the popup or the
+// service worker (the popup's permission prompt can close the popup before its
+// own callback runs, so the worker finishes the job via permissions.onAdded).
+function finalizePendingCustom() {
+  return chrome.storage.local.get({ mpduaPending: "" }).then((res) => {
+    const pattern = res.mpduaPending;
+    if (!pattern) return null;
+    const origin = customOriginPattern(pattern);
+    if (!origin) return chrome.storage.local.remove("mpduaPending").then(() => null);
+    return chrome.permissions.contains({ origins: [origin] }).then((has) => {
+      if (!has) return null; // not granted yet (or denied)
+      return registerCustomScript(pattern)
+        .then(() => chrome.storage.sync.get({ customSites: [] }))
+        .then((s) => {
+          const sites = s.customSites || [];
+          if (sites.indexOf(pattern) === -1) sites.push(pattern);
+          return chrome.storage.sync.set({ customSites: sites });
+        })
+        .then(() => chrome.storage.local.remove("mpduaPending"))
+        .then(() => pattern);
+    });
+  });
+}
+
 function customMatches(host, pattern) {
   const p = normalizePattern(pattern);
   if (!p) return false;

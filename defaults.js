@@ -37,6 +37,7 @@ function getDefaultSettings() {
     frequency: "session", // "always" | "session" | "daily"
     darkMode: false,       // dark theme for the popup and the reminder modal
     disabledDefaults: [],  // ids of built-in marketplaces the user turned off
+    removedDefaults: [],   // ids of built-in marketplaces the user removed from the list
     customSites: []        // user-added patterns, e.g. "shop.example.com"
   };
 }
@@ -66,8 +67,10 @@ function findMatchingSite(host, path, settings) {
   path = (path || "").toLowerCase();
 
   const disabled = settings.disabledDefaults || [];
+  const removed = settings.removedDefaults || [];
   for (const site of DEFAULT_MARKETPLACES) {
     if (disabled.indexOf(site.id) !== -1) continue;
+    if (removed.indexOf(site.id) !== -1) continue;
     try {
       if (site.test(host, path)) return { id: site.id, label: site.label };
     } catch (e) {

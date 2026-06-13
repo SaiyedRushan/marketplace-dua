@@ -73,8 +73,11 @@ function applyTheme() {
 function renderDefaults() {
   el.defaults.innerHTML = "";
   const disabled = settings.disabledDefaults || [];
+  const removed = settings.removedDefaults || [];
 
   for (const site of DEFAULT_MARKETPLACES) {
+    if (removed.indexOf(site.id) !== -1) continue;
+
     const item = document.createElement("div");
     item.className = "item";
 
@@ -90,8 +93,34 @@ function renderDefaults() {
 
     label.appendChild(cb);
     label.appendChild(name);
+
+    const remove = document.createElement("button");
+    remove.className = "remove";
+    remove.textContent = "Remove";
+    remove.addEventListener("click", () => removeDefault(site.id));
+
     item.appendChild(label);
+    item.appendChild(remove);
     el.defaults.appendChild(item);
+  }
+
+  // Offer a way back — built-ins are part of the extension, not user data.
+  if (removed.length > 0) {
+    const row = document.createElement("div");
+    row.className = "restore-row";
+
+    const txt = document.createElement("span");
+    txt.textContent =
+      removed.length + (removed.length === 1 ? " marketplace removed" : " marketplaces removed");
+
+    const btn = document.createElement("button");
+    btn.className = "restore-btn";
+    btn.textContent = "Restore all";
+    btn.addEventListener("click", restoreDefaults);
+
+    row.appendChild(txt);
+    row.appendChild(btn);
+    el.defaults.appendChild(row);
   }
 }
 
@@ -133,6 +162,21 @@ function toggleDefault(id, enabled) {
   else set.add(id);
   settings.disabledDefaults = Array.from(set);
   save();
+}
+
+function removeDefault(id) {
+  const set = new Set(settings.removedDefaults || []);
+  set.add(id);
+  settings.removedDefaults = Array.from(set);
+  const site = DEFAULT_MARKETPLACES.find((s) => s.id === id);
+  save("Removed " + (site ? site.label : id));
+  renderDefaults();
+}
+
+function restoreDefaults() {
+  settings.removedDefaults = [];
+  save("Restored marketplaces");
+  renderDefaults();
 }
 
 function addCustom(raw) {

@@ -171,6 +171,20 @@ body {
 }
 .remove:hover { background: var(--danger-hover); }
 
+.item.needs-perm .name { color: var(--muted); }
+.enable {
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent-text);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.enable:hover { background: var(--hover); }
+
 /* Add row */
 .add-row { display: flex; gap: 8px; margin-bottom: 10px; }
 .add-input {

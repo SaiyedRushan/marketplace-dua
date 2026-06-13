@@ -58,19 +58,31 @@ It shows two things, with links to verify each hadith on [sunnah.com](https://su
 
 ```
 manifest.json          Manifest V3 config
-defaults.js            Built-in marketplaces + matching logic (shared)
+defaults.js            Built-in marketplaces + matching/permission helpers (shared)
+background.js          Re-registers custom-site scripts on startup/install
 content.js             Detects marketplaces and renders the du'a modal
 popup.html/.css/.js    Settings UI
 icons/                 Generated PNG icons
 scripts/generate_icons.py   Regenerates the icons (no dependencies)
 ```
 
+## Permissions
+
+The extension follows least privilege — it does **not** request broad access to
+all sites:
+
+- **Built-in marketplaces** are listed explicitly in the manifest's
+  `content_scripts`, so they work automatically.
+- **Custom sites** use *optional* host permissions: when you add a site in the
+  popup, Chrome asks for access to just that domain, and its content script is
+  registered dynamically (`scripting`). Removing the site unregisters it and
+  revokes the permission.
+
+The content script only checks the current hostname and does nothing on
+non-marketplace pages.
+
 ## Notes
 
-- The content script runs on all sites so it can match the custom domains you
-  add — that's why Chrome shows the "read and change data on websites"
-  permission. The script only checks the current hostname and does nothing on
-  non-marketplace pages.
 - To regenerate icons after tweaking colours/shape: `python3 scripts/generate_icons.py`.
 
 May Allah make your transactions blessed.

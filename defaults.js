@@ -52,6 +52,20 @@ function normalizePattern(input) {
   return s.trim();
 }
 
+// Match-pattern + dynamic-script id for a user-added custom site. Custom sites
+// are granted host access at runtime (optional permissions), so the popup and
+// the service worker both need to derive these consistently.
+function customOriginPattern(input) {
+  const d = normalizePattern(input);
+  if (!d || d.indexOf(".") === -1) return null; // must be a real domain
+  return "*://*." + d + "/*";
+}
+
+function customScriptId(input) {
+  const d = normalizePattern(input);
+  return "mpdua_" + d.replace(/[^a-z0-9]/g, "_");
+}
+
 function customMatches(host, pattern) {
   const p = normalizePattern(pattern);
   if (!p) return false;

@@ -153,7 +153,48 @@ function renderCustom() {
     item.appendChild(name);
     item.appendChild(remove);
     el.custom.appendChild(item);
+
+    // Surface sites that don't yet have host permission on this device
+    // (e.g. the list synced over but access was never granted here).
+    const origin = customOriginPattern(pattern);
+    if (origin) {
+      chrome.permissions.contains({ origins: [origin] }, (has) => {
+        if (has) return;
+        item.classList.add("needs-perm");
+        const enable = document.createElement("button");
+        enable.className = "enable";
+        enable.textContent = "Enable";
+        enable.addEventListener("click", () => {
+          chrome.permissions.request({ origins: [origin] }, (granted) => {
+            if (!granted) return flash("Permission needed for " + pattern);
+            registerCustom(pattern, () => {
+              flash("Enabled " + pattern);
+              renderCustom();
+            });
+          });
+        });
+        item.insertBefore(enable, remove);
+      });
+    }
   }
+}
+
+// Register a content script for a custom site (idempotent).
+function registerCustom(pattern, done) {
+  const origin = customOriginPattern(pattern);
+  const id = customScriptId(pattern);
+  if (!origin) return done && done();
+
+  chrome.scripting.getRegisteredContentScripts({ ids: [id] }, (existing) => {
+    if (existing && existing.length) return done && done();
+    chrome.scripting.registerContentScripts(
+      [{ id, matches: [origin], js: ["defaults.js", "content.js"], runAt: "document_idle" }],
+      () => {
+        void chrome.runtime.lastError; // ignore "already registered" races
+        done && done();
+      }
+    );
+  });
 }
 
 function toggleDefault(id, enabled) {
@@ -181,8 +222,8 @@ function restoreDefaults() {
 
 function addCustom(raw) {
   const pattern = normalizePattern(raw);
-  if (!pattern) {
-    flash("Enter a valid website");
+  if (!pattern || pattern.indexOf(".") === -1) {
+    flash("Enter a full domain, e.g. shop.example.com");
     return;
   }
   const sites = settings.customSites || [];
@@ -191,16 +232,34 @@ function addCustom(raw) {
     el.addInput.value = "";
     return;
   }
-  settings.customSites = sites.concat(pattern);
-  el.addInput.value = "";
-  save("Added " + pattern);
-  renderCustom();
+
+  // Ask for access to just this site, then register its content script.
+  const origin = customOriginPattern(pattern);
+  chrome.permissions.request({ origins: [origin] }, (granted) => {
+    if (!granted) {
+      flash("Permission needed to add " + pattern);
+      return;
+    }
+    registerCustom(pattern, () => {
+      settings.customSites = sites.concat(pattern);
+      el.addInput.value = "";
+      save("Added " + pattern);
+      renderCustom();
+    });
+  });
 }
 
 function removeCustom(pattern) {
-  settings.customSites = (settings.customSites || []).filter((p) => p !== pattern);
-  save("Removed " + pattern);
-  renderCustom();
+  const origin = customOriginPattern(pattern);
+  const id = customScriptId(pattern);
+
+  chrome.scripting.unregisterContentScripts({ ids: [id] }, () => {
+    void chrome.runtime.lastError; // fine if it wasn't registered
+    if (origin) chrome.permissions.remove({ origins: [origin] }, () => void chrome.runtime.lastError);
+    settings.customSites = (settings.customSites || []).filter((p) => p !== pattern);
+    save("Removed " + pattern);
+    renderCustom();
+  });
 }
 
 function save(message) {
